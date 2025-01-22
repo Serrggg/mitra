@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Drop for Sonam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        .priority-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .priority-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .priority-btn.low { background-color: #90EE90; }
+        .priority-btn.medium { background-color: #FFD700; }
+        .priority-btn.high { background-color: #FFA07A; }
+        .priority-btn.urgent { background-color: #FF6B6B; }
+        .priority-btn.selected {
+            outline: 3px solid #333;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        #success-message {
+            display: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Message Drop for Sonam</h1>
+        <form action="https://formsubmit.co/anon510@altmails.com" method="POST">
+            <div class="form-group">
+                <label>Priority:</label>
+                <div class="priority-options">
+                    <button type="button" class="priority-btn low" data-priority="Low Priority">Low Priority</button>
+                    <button type="button" class="priority-btn medium" data-priority="Medium Priority">Medium Priority</button>
+                    <button type="button" class="priority-btn high" data-priority="High Priority">High Priority</button>
+                    <button type="button" class="priority-btn urgent" data-priority="Urgent">Urgent</button>
+                </div>
+                <input type="hidden" id="selectedPriority" name="priority" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Your message:</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <!-- FormSubmit redirects -->
+            <input type="hidden" name="_next" value="https://mitra-eight.vercel.app/">
+            <input type="hidden" name="_subject" value="New Message Drop">
+            <button type="submit">Send Message</button>
+        </form>
+        <div id="success-message">Message sent successfully!</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const priorityButtons = document.querySelectorAll('.priority-btn');
+            const priorityInput = document.getElementById('selectedPriority');
+
+            priorityButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove selected class from all buttons
+                    priorityButtons.forEach(btn => btn.classList.remove('selected'));
+                    // Add selected class to clicked button
+                    this.classList.add('selected');
+                    // Update hidden input
+                    priorityInput.value = this.dataset.priority;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
